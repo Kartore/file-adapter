@@ -1,0 +1,59 @@
+{
+	"name": "@kartore/file-adapter",
+	"version": "0.1.0",
+	"type": "module",
+	"publishConfig": {
+		"access": "public",
+		"registry": "https://registry.npmjs.org"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Kartore/file-adapter.git"
+	},
+	"files": [
+		"dist",
+		"src",
+		"README.md"
+	],
+	"exports": {
+		"./svelte": {
+			"types": "./src/svelte/index.ts",
+			"svelte": "./src/svelte/index.ts"
+		},
+		"./svelte/features": {
+			"types": "./src/svelte/features.ts",
+			"svelte": "./src/svelte/features.ts"
+		},
+		"./vite": {
+			"types": "./dist/types/vite/index.d.ts",
+			"import": "./dist/vite.js"
+		},
+		"./package.json": "./package.json"
+	},
+	"scripts": {
+		"build": "vite build && tsc -p tsconfig.package.json",
+		"prepublishOnly": "pnpm check",
+		"typecheck": "tsc --noEmit",
+		"check": "pnpm typecheck && pnpm build",
+		"lint": "prettier --check . && eslint ."
+	},
+	"peerDependencies": {
+		"maplibre-gl": "^5.0.0",
+		"svelte": "^5.0.0"
+	},
+	"devDependencies": {
+		"@eslint/js": "^10.0.1",
+		"eslint": "^10.4.1",
+		"eslint-config-prettier": "^10.1.8",
+		"eslint-plugin-svelte": "^3.19.0",
+		"globals": "^17.6.0",
+		"maplibre-gl": "^5.24.0",
+		"prettier": "^3.8.3",
+		"prettier-plugin-svelte": "^4.1.0",
+		"svelte": "^5.56.1",
+		"typescript": "^5.9.3",
+		"typescript-eslint": "^8.60.1",
+		"vite": "^8.0.16"
+	},
+	"packageManager": "pnpm@11.11.0+sha512.4463f65fd80ed80d69bc1d4bf163ee94f605c7380fc318bb5b2ebe15f8cd12d49c51a4d59e951b401e764d3b6ca751cbf51bc50ed7001a6bcb4935e684c34882"
+}
