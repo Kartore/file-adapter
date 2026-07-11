@@ -21,7 +21,10 @@ declare module '$lib/editor/EditorModule.ts' {
 
 	export type EditorModule = {
 		id: string;
+		/** @deprecated Use menuSection / headerStatus. */
 		headerAction?: Component;
+		menuSection?: Component;
+		headerStatus?: Component;
 		overlays?: Component[];
 		pages?: EditorModulePage[];
 		setup?: (editor: EditorApi) => unknown;

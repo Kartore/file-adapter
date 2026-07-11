@@ -1,11 +1,13 @@
 import type { EditorModule } from '$lib/editor/EditorModule.ts';
 
-import FileHeaderAction from './components/FileHeaderAction.svelte';
+import FileHeaderStatus from './components/FileHeaderStatus.svelte';
+import FileMenuSection from './components/FileMenuSection.svelte';
 import { FileSyncStore } from './stores/fileSyncStore.svelte.ts';
 
 export const fileModule: EditorModule = {
 	id: 'file',
-	headerAction: FileHeaderAction,
+	menuSection: FileMenuSection,
+	headerStatus: FileHeaderStatus,
 	setup: (editor) => ({
 		sync: new FileSyncStore(editor)
 	})
