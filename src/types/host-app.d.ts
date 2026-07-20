@@ -19,11 +19,15 @@ declare module '$lib/editor/EditorModule.ts' {
 		component: Component;
 	};
 
+	export type EditorMenuId = 'file' | 'edit' | 'view' | 'assets';
+
 	export type EditorModule = {
 		id: string;
-		/** @deprecated Use menuSection / headerStatus. */
+		/** @deprecated Use menuSections / headerStatus. */
 		headerAction?: Component;
+		/** @deprecated Use menuSections.file. */
 		menuSection?: Component;
+		menuSections?: Partial<Record<EditorMenuId, Component>>;
 		headerStatus?: Component;
 		overlays?: Component[];
 		pages?: EditorModulePage[];
