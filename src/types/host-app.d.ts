@@ -31,8 +31,6 @@ declare module '$lib/editor/EditorModule.ts' {
 		id: string;
 		/** @deprecated Use menuSections / headerStatus. */
 		headerAction?: Component;
-		/** @deprecated Use menuSections.file. */
-		menuSection?: Component;
 		menuSections?: Partial<Record<EditorMenuId, Component>>;
 		headerStatus?: Component;
 		overlays?: Component[];
