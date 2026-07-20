@@ -7,6 +7,28 @@ declare module '$lib/editor/EditorModule.ts' {
 		label: string;
 	};
 
+	export type StyleHistoryRevision = {
+		id: string;
+		message: string;
+		authorName: string;
+		authorLogin?: string;
+		avatarUrl?: string;
+		authoredAt: string;
+		htmlUrl?: string;
+	};
+
+	export type StyleHistoryPage = {
+		revisions: StyleHistoryRevision[];
+		hasNext: boolean;
+	};
+
+	export type StyleHistoryProvider = {
+		readonly available: boolean;
+		readonly label: string | null;
+		listRevisions: (options: { page: number; perPage?: number }) => Promise<StyleHistoryPage>;
+		loadStyleAtRevision: (revisionId: string) => Promise<StyleSpecification>;
+	};
+
 	export type SaveProvider = {
 		readonly available: boolean;
 		save: () => void | Promise<void>;
@@ -17,6 +39,7 @@ declare module '$lib/editor/EditorModule.ts' {
 		setStyle: (style: StyleSpecification) => void;
 		setPreview: (preview: EditorPreview | null) => void;
 		getPreview: () => EditorPreview | null;
+		registerStyleHistoryProvider: (provider: StyleHistoryProvider) => void;
 		registerSaveProvider: (provider: SaveProvider) => void;
 	};
 
