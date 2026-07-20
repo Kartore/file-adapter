@@ -8,9 +8,18 @@ export const fileModule: EditorModule = {
 	id: 'file',
 	menuSection: FileMenuSection,
 	headerStatus: FileHeaderStatus,
-	setup: (editor) => ({
-		sync: new FileSyncStore(editor)
-	})
+	setup: (editor) => {
+		const sync = new FileSyncStore(editor);
+		editor.registerSaveProvider({
+			get available() {
+				return sync.connection !== null;
+			},
+			save: async () => {
+				await sync.save();
+			}
+		});
+		return { sync };
+	}
 };
 
 // ホストの kartore() が client 集約で読む標準 export (kartore アダプタ契約)

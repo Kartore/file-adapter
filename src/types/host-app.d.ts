@@ -7,11 +7,17 @@ declare module '$lib/editor/EditorModule.ts' {
 		label: string;
 	};
 
+	export type SaveProvider = {
+		readonly available: boolean;
+		save: () => void | Promise<void>;
+	};
+
 	export type EditorApi = {
 		getStyle: () => StyleSpecification;
 		setStyle: (style: StyleSpecification) => void;
 		setPreview: (preview: EditorPreview | null) => void;
 		getPreview: () => EditorPreview | null;
+		registerSaveProvider: (provider: SaveProvider) => void;
 	};
 
 	export type EditorModulePage = {
