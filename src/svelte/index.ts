@@ -6,7 +6,7 @@ import { FileSyncStore } from './stores/fileSyncStore.svelte.ts';
 
 export const fileModule: EditorModule = {
 	id: 'file',
-	menuSection: FileMenuSection,
+	menuSections: { file: FileMenuSection },
 	headerStatus: FileHeaderStatus,
 	setup: (editor) => {
 		const sync = new FileSyncStore(editor);
