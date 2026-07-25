@@ -1,5 +1,5 @@
 export type FileWritableStreamLike = {
-	write: (data: string) => Promise<void>;
+	write: (data: string | Uint8Array) => Promise<void>;
 	close: () => Promise<void>;
 };
 
@@ -47,6 +47,16 @@ export type FileIntegrationFeatures = {
 	saveStyleFileAs: (styleText: string, suggestedName?: string) => Promise<FileSystemFileHandleLike>;
 };
 
+export type PickedStylePackFile = {
+	name: string;
+	bytes: Uint8Array;
+};
+
+export type SavedStylePackFile = {
+	name: string;
+	handle: FileSystemFileHandleLike | null;
+};
+
 export class FileFeatureUnavailableError extends Error {
 	constructor() {
 		super('Local file access is not available in this browser.');
@@ -59,6 +69,15 @@ const stylePickerTypes: FilePickerAcceptTypeLike[] = [
 		accept: {
 			'application/json': ['.json'],
 			'text/json': ['.json']
+		}
+	}
+];
+
+const stylePackPickerTypes: FilePickerAcceptTypeLike[] = [
+	{
+		description: 'Kartore project',
+		accept: {
+			'application/zip': ['.kartore']
 		}
 	}
 ];
@@ -82,6 +101,54 @@ const requirePickerWindow = (): Required<
 		showOpenFilePicker: pickerWindow.showOpenFilePicker.bind(pickerWindow),
 		showSaveFilePicker: pickerWindow.showSaveFilePicker.bind(pickerWindow)
 	};
+};
+
+const abortError = (): DOMException => new DOMException('The operation was aborted.', 'AbortError');
+
+const pickStylePackWithInput = (): Promise<File> => {
+	if (typeof document === 'undefined') throw new FileFeatureUnavailableError();
+	return new Promise((resolve, reject) => {
+		const input = document.createElement('input');
+		input.type = 'file';
+		input.accept = '.kartore,application/zip';
+		input.hidden = true;
+
+		const cleanup = () => input.remove();
+		input.addEventListener(
+			'change',
+			() => {
+				const file = input.files?.[0];
+				cleanup();
+				if (file) resolve(file);
+				else reject(abortError());
+			},
+			{ once: true }
+		);
+		input.addEventListener(
+			'cancel',
+			() => {
+				cleanup();
+				reject(abortError());
+			},
+			{ once: true }
+		);
+		document.body.append(input);
+		input.click();
+	});
+};
+
+const downloadStylePack = (bytes: Uint8Array, fileName: string): void => {
+	if (typeof document === 'undefined') throw new FileFeatureUnavailableError();
+	const ownedBytes = Uint8Array.from(bytes);
+	const url = URL.createObjectURL(new Blob([ownedBytes], { type: 'application/zip' }));
+	const anchor = document.createElement('a');
+	anchor.href = url;
+	anchor.download = fileName;
+	anchor.hidden = true;
+	document.body.append(anchor);
+	anchor.click();
+	anchor.remove();
+	setTimeout(() => URL.revokeObjectURL(url), 0);
 };
 
 const ensureWritePermission = async (handle: FileSystemFileHandleLike) => {
@@ -133,6 +200,78 @@ export const saveStyleFileAs = async (
 	});
 	await writeStyleFile(handle, styleText);
 	return handle;
+};
+
+export const pickStylePackFile = async (): Promise<PickedStylePackFile> => {
+	const pickerWindow = getPickerWindow();
+	let file: File;
+	if (pickerWindow?.showOpenFilePicker) {
+		const [handle] = await pickerWindow.showOpenFilePicker({
+			multiple: false,
+			excludeAcceptAllOption: false,
+			types: stylePackPickerTypes
+		});
+		if (!handle) throw new Error('No file was selected.');
+		file = await handle.getFile();
+	} else {
+		file = await pickStylePackWithInput();
+	}
+	return {
+		name: file.name,
+		bytes: new Uint8Array(await file.arrayBuffer())
+	};
+};
+
+export const writeStylePackFile = async (
+	handle: FileSystemFileHandleLike,
+	bytes: Uint8Array
+): Promise<void> => {
+	await ensureWritePermission(handle);
+	const writable = await handle.createWritable();
+	try {
+		await writable.write(bytes);
+	} finally {
+		await writable.close();
+	}
+};
+
+/**
+ * File System Access API の picker は transient user activation が必要なため、
+ * フォント読み出しや zip 生成より先にこの関数を呼ぶ。
+ */
+export const pickStylePackSaveTarget = async (
+	suggestedName = 'project.kartore'
+): Promise<SavedStylePackFile> => {
+	const pickerWindow = getPickerWindow();
+	if (pickerWindow?.showSaveFilePicker) {
+		const handle = await pickerWindow.showSaveFilePicker({
+			suggestedName,
+			excludeAcceptAllOption: false,
+			types: stylePackPickerTypes
+		});
+		return { name: handle.name, handle };
+	}
+	return { name: suggestedName, handle: null };
+};
+
+export const writeStylePackSaveTarget = async (
+	target: SavedStylePackFile,
+	bytes: Uint8Array
+): Promise<void> => {
+	if (target.handle) {
+		await writeStylePackFile(target.handle, bytes);
+	} else {
+		downloadStylePack(bytes, target.name);
+	}
+};
+
+export const saveStylePackFileAs = async (
+	bytes: Uint8Array,
+	suggestedName = 'project.kartore'
+): Promise<SavedStylePackFile> => {
+	const target = await pickStylePackSaveTarget(suggestedName);
+	await writeStylePackSaveTarget(target, bytes);
+	return target;
 };
 
 export const fileIntegrationFeatures: FileIntegrationFeatures = {

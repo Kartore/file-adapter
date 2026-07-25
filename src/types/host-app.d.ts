@@ -42,9 +42,23 @@ declare module '$lib/editor/EditorModule.ts' {
 		save: () => void | Promise<void>;
 	};
 
+	type SpriteIcons = Record<string, string>;
+
+	type StoredFont = {
+		familyName: string;
+		styleName: string;
+		addedAt: number;
+		bytes: ArrayBuffer;
+	};
+
 	export type EditorApi = {
+		readonly appVersion: string;
 		getStyle: () => StyleSpecification;
 		setStyle: (style: StyleSpecification) => void;
+		getSpriteIcons: () => SpriteIcons;
+		replaceSpriteIcons: (icons: SpriteIcons) => Promise<void>;
+		getStoredFonts: () => Promise<Record<string, StoredFont>>;
+		replaceStoredFonts: (fonts: Record<string, StoredFont>) => Promise<void>;
 		setPreview: (preview: EditorPreview | null) => void;
 		getPreview: () => EditorPreview | null;
 		registerStyleHistoryProvider: (provider: StyleHistoryProvider) => void;
@@ -67,6 +81,38 @@ declare module '$lib/editor/EditorModule.ts' {
 		overlays?: Component[];
 		pages?: EditorModulePage[];
 		setup?: (editor: EditorApi) => unknown;
+	};
+}
+
+declare module '$lib/utils/stylePack.ts' {
+	import type { StyleSpecification } from 'maplibre-gl';
+
+	export type SpriteIcons = Record<string, string>;
+
+	export type StoredFont = {
+		familyName: string;
+		styleName: string;
+		addedAt: number;
+		bytes: ArrayBuffer;
+	};
+
+	export type StylePackAssets = {
+		icons: SpriteIcons;
+		fonts: Record<string, StoredFont>;
+	};
+
+	export type StylePackFiles = Record<string, string | Uint8Array>;
+
+	export const createStylePack: (
+		style: StyleSpecification,
+		assets: StylePackAssets,
+		meta: { appVersion: string; createdAt: string }
+	) => StylePackFiles;
+
+	export const readStylePack: (files: StylePackFiles) => {
+		style: StyleSpecification;
+		assets: StylePackAssets;
+		warnings: string[];
 	};
 }
 

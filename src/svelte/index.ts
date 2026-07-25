@@ -2,14 +2,18 @@ import type { EditorModule } from '$lib/editor/EditorModule.ts';
 
 import FileHeaderStatus from './components/FileHeaderStatus.svelte';
 import FileMenuSection from './components/FileMenuSection.svelte';
+import StylePackDialogs from './components/StylePackDialogs.svelte';
 import { FileSyncStore } from './stores/fileSyncStore.svelte.ts';
+import { StylePackStore } from './stores/stylePackStore.svelte.ts';
 
 export const fileModule: EditorModule = {
 	id: 'file',
 	menuSections: { file: FileMenuSection },
 	headerStatus: FileHeaderStatus,
+	overlays: [StylePackDialogs],
 	setup: (editor) => {
 		const sync = new FileSyncStore(editor);
+		const pack = new StylePackStore(editor);
 		editor.registerSaveProvider({
 			get available() {
 				return sync.connection !== null;
@@ -18,7 +22,7 @@ export const fileModule: EditorModule = {
 				await sync.save();
 			}
 		});
-		return { sync };
+		return { sync, pack };
 	}
 };
 
@@ -32,15 +36,24 @@ export {
 	FileFeatureUnavailableError,
 	fileIntegrationFeatures,
 	isFileSystemAccessSupported,
+	pickStylePackSaveTarget,
+	pickStylePackFile,
 	pickStyleFile,
 	readStyleFile,
+	saveStylePackFileAs,
 	saveStyleFileAs,
+	writeStylePackFile,
+	writeStylePackSaveTarget,
 	writeStyleFile,
 	type FileIntegrationFeatures,
-	type FileSystemFileHandleLike
+	type FileSystemFileHandleLike,
+	type PickedStylePackFile,
+	type SavedStylePackFile
 } from './features.ts';
+export { createStylePackArchive, readStylePackArchive } from './stylePackArchive.ts';
 export {
 	FileSyncStore,
 	serializeStyle,
 	type FileConnection
 } from './stores/fileSyncStore.svelte.ts';
+export { StylePackStore } from './stores/stylePackStore.svelte.ts';
