@@ -1,6 +1,6 @@
 declare module '$lib/editor/EditorModule.ts' {
 	import type { Component } from 'svelte';
-	import type { StyleSpecification } from 'maplibre-gl';
+	import type { LayerSpecification, StyleSpecification } from 'maplibre-gl';
 
 	export type EditorPreview = {
 		style: StyleSpecification;
@@ -25,8 +25,16 @@ declare module '$lib/editor/EditorModule.ts' {
 	export type StyleHistoryProvider = {
 		readonly available: boolean;
 		readonly label: string | null;
-		listRevisions: (options: { page: number; perPage?: number }) => Promise<StyleHistoryPage>;
+		listRevisions: (options: {
+			page: number;
+			perPage?: number;
+			scope?: { layerId: string };
+		}) => Promise<StyleHistoryPage>;
 		loadStyleAtRevision: (revisionId: string) => Promise<StyleSpecification>;
+		loadLayerAtRevision?: (
+			revisionId: string,
+			layerId: string
+		) => Promise<LayerSpecification | null>;
 	};
 
 	export type SaveProvider = {
