@@ -8,20 +8,20 @@
 
 {#if sync.error}
 	<div
-		class="flex h-7 max-w-32 items-center rounded-full border border-red-200 bg-red-50 px-2 text-[11px] font-semibold text-red-700"
+		class="flex h-7 max-w-32 items-center rounded-[6px] bg-field px-2 text-[11px] font-semibold text-ink-2"
 		title={sync.error}
 		role="alert"
 	>
-		File error
+		ファイルエラー
 	</div>
 {:else if sync.connection}
 	<div
-		class="flex h-7 max-w-32 items-center gap-1.5 rounded-full border border-gray-200 bg-gray-50 px-2 text-[11px] font-semibold text-gray-600"
-		title={sync.status ?? `Local file: ${sync.connection.name}`}
+		class="flex h-7 max-w-32 items-center gap-1.5 rounded-[6px] bg-field px-2 text-[11px] font-semibold text-ink-2"
+		title={sync.status ?? `ローカルファイル: ${sync.connection.name}`}
 	>
 		<span class="truncate">{sync.connection.name}</span>
 		{#if sync.isDirty}
-			<span class="h-1.5 w-1.5 shrink-0 rounded-full bg-amber-500" title="Unsaved changes"></span>
+			<span class="h-1.5 w-1.5 shrink-0 rounded-full bg-ink-3" title="未保存の変更"></span>
 		{/if}
 	</div>
 {/if}

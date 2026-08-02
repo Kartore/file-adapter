@@ -8,9 +8,9 @@
 
 <ConfirmDialog
 	bind:open={pack.confirmOpen}
-	title="Replace the current local project?"
-	description="Opening this .kartore file replaces the current local project. Any unsaved style changes, sprite icons, and fonts will be lost. Existing data will not be merged."
-	confirmLabel="Replace and open"
+	title="現在のローカルプロジェクトを置き換えますか?"
+	description="この .kartore ファイルを開くと現在のローカルプロジェクトが置き換わり、未保存のスタイル変更・スプライト・フォントは失われます。既存データとの統合は行いません。"
+	confirmLabel="置き換えて開く"
 	danger
 	onConfirm={pack.replaceWithPending}
 />
@@ -42,7 +42,7 @@
 						class="h-9 cursor-pointer rounded-md bg-gray-950 px-3 text-xs font-semibold text-white transition-colors hover:bg-gray-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-950"
 						onclick={pack.dismissError}
 					>
-						Close
+						閉じる
 					</button>
 				</div>
 			</div>

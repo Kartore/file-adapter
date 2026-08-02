@@ -63,6 +63,7 @@ declare module '$lib/editor/EditorModule.ts' {
 		getPreview: () => EditorPreview | null;
 		registerStyleHistoryProvider: (provider: StyleHistoryProvider) => void;
 		registerSaveProvider: (provider: SaveProvider) => void;
+		openRailItem: (moduleId: string, railItemId: string) => void;
 	};
 
 	export type EditorModulePage = {
@@ -70,15 +71,27 @@ declare module '$lib/editor/EditorModule.ts' {
 		component: Component;
 	};
 
-	export type EditorMenuId = 'file' | 'edit' | 'view' | 'assets';
+	export type EditorMenuId = 'file' | 'edit' | 'view';
+
+	export type EditorRailPlacement = 'main' | 'bottom';
+
+	export type EditorModuleRailItem = {
+		id: string;
+		label: string;
+		icon: Component;
+		secondColumn: Component;
+		placement?: EditorRailPlacement;
+	};
 
 	export type EditorModule = {
 		id: string;
 		/** @deprecated Use menuSections / headerStatus. */
 		headerAction?: Component;
 		menuSections?: Partial<Record<EditorMenuId, Component>>;
+		/** A compact status shown beside the file name in the top bar. */
 		headerStatus?: Component;
 		overlays?: Component[];
+		railItems?: EditorModuleRailItem[];
 		pages?: EditorModulePage[];
 		setup?: (editor: EditorApi) => unknown;
 	};

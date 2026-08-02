@@ -10,7 +10,7 @@
 	disabled={!sync.isSupported || sync.isBusy || pack.isBusy}
 	onSelect={() => void sync.open()}
 >
-	Open local file…
+	ローカルファイルを開く…
 </MenuItem>
 {#if sync.isSupported}
 	<MenuItem
@@ -18,23 +18,23 @@
 		shortcut={sync.connection ? '⌘S' : undefined}
 		onSelect={() => void sync.save()}
 	>
-		Save local file
+		保存
 	</MenuItem>
 	<MenuItem disabled={sync.isBusy || pack.isBusy} onSelect={() => void sync.saveAs()}>
-		Save local file as…
+		名前を付けて保存…
 	</MenuItem>
 	{#if sync.connection}
 		<MenuSeparator />
-		<MenuItem onSelect={sync.disconnect}>Disconnect local file</MenuItem>
+		<MenuItem onSelect={sync.disconnect}>ローカルファイルとの接続を解除</MenuItem>
 	{/if}
 {/if}
 
 <MenuSeparator />
 <MenuItem disabled={sync.isBusy || pack.isBusy} onSelect={() => void pack.open()}>
-	Open .kartore…
+	.kartore を開く…
 </MenuItem>
 <MenuItem disabled={sync.isBusy || pack.isBusy} onSelect={() => void pack.saveAs()}>
-	Save as .kartore…
+	.kartore として保存…
 </MenuItem>
 
 {#if pack.status || pack.error || sync.status || sync.error}

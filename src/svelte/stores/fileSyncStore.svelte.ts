@@ -91,13 +91,13 @@ export class FileSyncStore {
 		this.connection = { name: handle.name };
 		this.lastSavedStyleText = styleText;
 		this.isDirty = false;
-		this.status = `Opened ${handle.name}`;
+		this.status = `${handle.name} を開きました`;
 		return result;
 	};
 
 	save = async () => {
 		if (!this.#fileHandle) return this.saveAs();
-		await this.writeToHandle(this.#fileHandle, 'Saved');
+		await this.writeToHandle(this.#fileHandle);
 		return this.#fileHandle;
 	};
 
@@ -115,7 +115,7 @@ export class FileSyncStore {
 			this.connection = { name: handle.name };
 			this.lastSavedStyleText = styleText;
 			this.isDirty = false;
-			this.status = `Saved ${handle.name}`;
+			this.status = `${handle.name} を保存しました`;
 			return handle;
 		} catch (error) {
 			if (isAbortError(error)) return null;
@@ -136,7 +136,7 @@ export class FileSyncStore {
 		this.error = null;
 	};
 
-	writeToHandle = async (handle: FileSystemFileHandleLike, statusPrefix: string) => {
+	writeToHandle = async (handle: FileSystemFileHandleLike) => {
 		this.isBusy = true;
 		this.error = null;
 		this.status = null;
@@ -145,7 +145,7 @@ export class FileSyncStore {
 			await fileIntegrationFeatures.writeStyleFile(handle, styleText);
 			this.lastSavedStyleText = styleText;
 			this.isDirty = false;
-			this.status = `${statusPrefix} ${handle.name}`;
+			this.status = `${handle.name} を保存しました`;
 		} catch (error) {
 			this.error = error instanceof Error ? error.message : String(error);
 		} finally {

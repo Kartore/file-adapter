@@ -139,7 +139,7 @@ test('open waits for confirmation and then applies style, icons, and fonts in or
 		await store.replaceWithPending();
 
 		assert.deepEqual(events, ['preview', 'style', 'icons', 'fonts']);
-		assert.equal(store.status, 'Opened project.kartore');
+		assert.equal(store.status, 'project.kartore を開きました');
 	} finally {
 		delete globalThis.window;
 	}
