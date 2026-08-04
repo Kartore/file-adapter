@@ -1,6 +1,6 @@
 import { strToU8, unzipSync, zipSync, type Zippable } from 'fflate';
 
-import type { StylePackFiles } from '$lib/utils/stylePack.ts';
+import type { StylePackFiles } from 'virtual:kartore-host/utils/stylePack.ts';
 
 const FONT_DIRECTORY_PREFIX = 'assets/fonts/';
 const FIXED_ZIP_MTIME = new Date(1980, 0, 1, 0, 0, 0);

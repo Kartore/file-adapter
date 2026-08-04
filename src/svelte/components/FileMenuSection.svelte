@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { MenuItem, MenuSeparator } from '$lib/components/common/HeaderMenu';
+	import { MenuItem, MenuSeparator } from 'virtual:kartore-host/components/common/HeaderMenu';
 
 	import { getFileContext } from '../context.ts';
 

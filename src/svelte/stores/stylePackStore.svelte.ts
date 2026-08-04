@@ -1,13 +1,13 @@
 import type { StyleSpecification } from 'maplibre-gl';
 import { SvelteDate } from 'svelte/reactivity';
 
-import type { EditorApi } from '$lib/editor/EditorModule.ts';
+import type { EditorApi } from 'virtual:kartore-host/editor/EditorModule.ts';
 import {
 	createStylePack,
 	readStylePack,
 	type StylePackAssets,
 	type StylePackFiles
-} from '$lib/utils/stylePack.ts';
+} from 'virtual:kartore-host/utils/stylePack.ts';
 
 import {
 	pickStylePackFile,

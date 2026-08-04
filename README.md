@@ -11,7 +11,7 @@ This adapter uses the browser File System Access API to open and save MapLibre s
 
 The `./svelte` exports point directly to the package's Svelte and TypeScript source. This package is
 consumable only through a Vite + Svelte host, which compiles the source for both SSR and CSR. The
-source intentionally imports host APIs through `$lib`; the host must provide that alias and the
+source intentionally imports host APIs through `virtual:kartore-host`; the host must provide that virtual module contract and the
 corresponding extension points.
 
 The adapter does not publish CSS or run its own Tailwind build. A Tailwind host must scan the

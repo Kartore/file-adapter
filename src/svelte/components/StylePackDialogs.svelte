@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { ConfirmDialog } from '$lib/components/common/ConfirmDialog';
+	import { ConfirmDialog } from 'virtual:kartore-host/components/common/ConfirmDialog';
 
 	import { getFileContext } from '../context.ts';
 

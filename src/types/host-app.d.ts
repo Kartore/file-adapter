@@ -1,4 +1,4 @@
-declare module '$lib/editor/EditorModule.ts' {
+declare module 'virtual:kartore-host/editor/EditorModule.ts' {
 	import type { Component } from 'svelte';
 	import type { LayerSpecification, StyleSpecification } from 'maplibre-gl';
 
@@ -97,7 +97,7 @@ declare module '$lib/editor/EditorModule.ts' {
 	};
 }
 
-declare module '$lib/utils/stylePack.ts' {
+declare module 'virtual:kartore-host/utils/stylePack.ts' {
 	import type { StyleSpecification } from 'maplibre-gl';
 
 	export type SpriteIcons = Record<string, string>;
@@ -129,7 +129,7 @@ declare module '$lib/utils/stylePack.ts' {
 	};
 }
 
-declare module '$lib/utils/styleImport.ts' {
+declare module 'virtual:kartore-host/utils/styleImport.ts' {
 	import type { StyleSpecification } from 'maplibre-gl';
 
 	export type StyleImportResult =

@@ -1,4 +1,4 @@
-import type { EditorModule } from '$lib/editor/EditorModule.ts';
+import type { EditorModule } from 'virtual:kartore-host/editor/EditorModule.ts';
 
 import FileHeaderStatus from './components/FileHeaderStatus.svelte';
 import FileMenuSection from './components/FileMenuSection.svelte';

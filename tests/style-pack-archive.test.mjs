@@ -18,7 +18,7 @@ before(async () => {
 	server = await createServer({
 		root: new URL('..', import.meta.url).pathname,
 		logLevel: 'silent',
-		resolve: { alias: { $lib: coreLib } },
+		resolve: { alias: { 'virtual:kartore-host': coreLib } },
 		server: { middlewareMode: true },
 		appType: 'custom'
 	});

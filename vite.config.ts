@@ -5,7 +5,7 @@ const external = (id: string): boolean =>
 	id === 'svelte' ||
 	id === 'vite' ||
 	id.startsWith('svelte/') ||
-	id.startsWith('$lib/');
+	id.startsWith('virtual:kartore-host/');
 
 export default defineConfig({
 	build: {
