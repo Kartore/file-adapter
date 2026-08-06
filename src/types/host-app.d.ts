@@ -42,6 +42,8 @@ declare module 'virtual:kartore-host/editor/EditorModule.ts' {
 		save: () => void | Promise<void>;
 	};
 
+	export type NewStyleHandler = () => void;
+
 	type SpriteIcons = Record<string, string>;
 
 	type StoredFont = {
@@ -63,6 +65,7 @@ declare module 'virtual:kartore-host/editor/EditorModule.ts' {
 		getPreview: () => EditorPreview | null;
 		registerStyleHistoryProvider: (provider: StyleHistoryProvider) => void;
 		registerSaveProvider: (provider: SaveProvider) => void;
+		registerNewStyleHandler: (handler: NewStyleHandler) => void;
 		openRailItem: (moduleId: string, railItemId: string) => void;
 	};
 

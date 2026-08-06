@@ -14,6 +14,7 @@ export const fileModule: EditorModule = {
 	setup: (editor) => {
 		const sync = new FileSyncStore(editor);
 		const pack = new StylePackStore(editor);
+		editor.registerNewStyleHandler(sync.disconnect);
 		editor.registerSaveProvider({
 			get available() {
 				return sync.connection !== null;
