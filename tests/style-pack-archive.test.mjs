@@ -116,7 +116,7 @@ test('the complete pack pipeline emits byte-identical archives after open', () =
 	assert.deepEqual(second, first);
 });
 
-test('open waits for confirmation and then applies style, icons, and fonts in order', async () => {
+test('open waits for confirmation and then loads the complete project', async () => {
 	const { meta, style, assets } = project();
 	const archive = createStylePackArchive(createStylePack(style, assets, meta));
 	const events = [];
@@ -124,10 +124,7 @@ test('open waits for confirmation and then applies style, icons, and fonts in or
 		showOpenFilePicker: async () => [openHandle('project.kartore', archive)]
 	};
 	const store = new StylePackStore({
-		setPreview: () => events.push('preview'),
-		setStyle: () => events.push('style'),
-		replaceSpriteIcons: async () => events.push('icons'),
-		replaceStoredFonts: async () => events.push('fonts')
+		loadProject: async (opened) => events.push(opened)
 	});
 
 	try {
@@ -138,7 +135,7 @@ test('open waits for confirmation and then applies style, icons, and fonts in or
 
 		await store.replaceWithPending();
 
-		assert.deepEqual(events, ['preview', 'style', 'icons', 'fonts']);
+		assert.deepEqual(events, [{ style, assets }]);
 		assert.equal(store.status, 'project.kartore を開きました');
 	} finally {
 		delete globalThis.window;

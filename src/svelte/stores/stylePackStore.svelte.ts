@@ -91,10 +91,7 @@ export class StylePackStore {
 		this.error = null;
 		this.status = null;
 		try {
-			this.#editor.setPreview(null);
-			this.#editor.setStyle(pending.style);
-			await this.#editor.replaceSpriteIcons(pending.assets.icons);
-			await this.#editor.replaceStoredFonts(pending.assets.fonts);
+			await this.#editor.loadProject({ style: pending.style, assets: pending.assets });
 			this.#meta = pending.meta;
 			this.fileName = pending.name;
 			this.status =

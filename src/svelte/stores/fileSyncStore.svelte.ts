@@ -85,8 +85,7 @@ export class FileSyncStore {
 			return result;
 		}
 
-		this.#editor.setPreview(null);
-		this.#editor.setStyle(result.style);
+		await this.#editor.loadProject({ style: result.style });
 		this.#fileHandle = handle;
 		this.connection = { name: handle.name };
 		this.lastSavedStyleText = styleText;

@@ -53,10 +53,19 @@ declare module 'virtual:kartore-host/editor/EditorModule.ts' {
 		bytes: ArrayBuffer;
 	};
 
+	export type EditorProject = {
+		style: StyleSpecification;
+		assets?: {
+			icons?: SpriteIcons;
+			fonts?: Record<string, StoredFont>;
+		};
+	};
+
 	export type EditorApi = {
 		readonly appVersion: string;
 		getStyle: () => StyleSpecification;
 		setStyle: (style: StyleSpecification) => void;
+		loadProject: (project: EditorProject) => Promise<void>;
 		getSpriteIcons: () => SpriteIcons;
 		replaceSpriteIcons: (icons: SpriteIcons) => Promise<void>;
 		getStoredFonts: () => Promise<Record<string, StoredFont>>;
@@ -130,6 +139,13 @@ declare module 'virtual:kartore-host/utils/stylePack.ts' {
 		assets: StylePackAssets;
 		warnings: string[];
 	};
+}
+
+declare module 'virtual:kartore-host/utils/stylePackArchive.ts' {
+	import type { StylePackFiles } from 'virtual:kartore-host/utils/stylePack.ts';
+
+	export const createStylePackArchive: (files: StylePackFiles) => Uint8Array;
+	export const readStylePackArchive: (bytes: Uint8Array) => StylePackFiles;
 }
 
 declare module 'virtual:kartore-host/utils/styleImport.ts' {
