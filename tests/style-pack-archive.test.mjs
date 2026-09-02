@@ -136,7 +136,7 @@ test('open waits for confirmation and then loads the complete project', async ()
 		await store.replaceWithPending();
 
 		assert.deepEqual(events, [{ style, assets }]);
-		assert.equal(store.status, 'project.kartore を開きました');
+		assert.equal(store.status, 'Opened project.kartore');
 	} finally {
 		delete globalThis.window;
 	}

@@ -34,7 +34,7 @@ const isAbortError = (error: unknown): boolean =>
 
 const manifestMeta = (files: StylePackFiles): StylePackMeta => {
 	const value = files['manifest.json'];
-	if (value === undefined) throw new Error('スタイルパックに manifest.json がありません');
+	if (value === undefined) throw new Error('Style pack is missing manifest.json');
 	const text = typeof value === 'string' ? value : new TextDecoder().decode(value);
 	const manifest = JSON.parse(text) as Record<string, unknown>;
 	return {
@@ -51,7 +51,7 @@ export class StylePackStore {
 	isBusy = $state(false);
 	confirmOpen = $state(false);
 	errorDialogOpen = $state(false);
-	errorTitle = $state('.kartore を開けませんでした');
+	errorTitle = $state('.kartore could not be opened');
 	error = $state<string | null>(null);
 	status = $state<string | null>(null);
 	fileName = $state<string | null>(null);
@@ -78,7 +78,7 @@ export class StylePackStore {
 			this.confirmOpen = true;
 		} catch (error) {
 			if (isAbortError(error)) return;
-			this.showError('.kartore を開けませんでした', error);
+			this.showError('.kartore could not be opened', error);
 		} finally {
 			this.isBusy = false;
 		}
@@ -96,11 +96,11 @@ export class StylePackStore {
 			this.fileName = pending.name;
 			this.status =
 				pending.warnings.length === 0
-					? `${pending.name} を開きました`
-					: `${pending.name} を ${pending.warnings.length} 件の警告付きで開きました`;
+					? `Opened ${pending.name}`
+					: `Opened ${pending.name} with ${pending.warnings.length} warnings`;
 			this.#pending = null;
 		} catch (error) {
-			this.showError('ローカルプロジェクトを置き換えられませんでした', error);
+			this.showError('Could not replace the local project', error);
 		} finally {
 			this.isBusy = false;
 		}
@@ -126,10 +126,10 @@ export class StylePackStore {
 			await writeStylePackSaveTarget(target, archive);
 			this.#meta = meta;
 			this.fileName = target.name;
-			this.status = `${target.name} を保存しました`;
+			this.status = `Saved ${target.name}`;
 		} catch (error) {
 			if (isAbortError(error)) return;
-			this.showError('.kartore を保存できませんでした', error);
+			this.showError('Could not save .kartore', error);
 		} finally {
 			this.isBusy = false;
 		}
