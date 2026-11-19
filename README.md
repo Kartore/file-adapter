@@ -18,8 +18,23 @@ The adapter does not publish CSS or run its own Tailwind build. A Tailwind host 
 adapter source when generating its single application stylesheet.
 
 The implementation lives under `src/`: `src/svelte/` contains the editor module,
-`src/types/` contains the host declarations, and `src/vite/` contains the adapter manifest.
+`src/types/` contains the `virtual:kartore-host/*` declarations, and `src/vite/` contains the adapter manifest.
 
 ## Host usage
 
-Pass `fileAdapter()` to the host's `kartore({ adapters: [...] })` Vite plugin.
+Requires `@kartore/editor` 0.1 (adapter contract 2). Pass `fileAdapter()` to the editor's `kartore()` Vite preset:
+
+```ts
+// vite.config.ts
+import { cloudflare } from '@cloudflare/vite-plugin';
+import { kartore } from '@kartore/editor/vite';
+import { fileAdapter } from '@kartore/file-adapter/vite';
+import { defineConfig } from 'vite';
+
+export default defineConfig({
+	plugins: [kartore({ adapters: [fileAdapter()], runtime: 'cloudflare' }), cloudflare()]
+});
+```
+
+Editor types (`EditorModule`, `EditorApi`, …) are imported from `@kartore/editor/types`;
+`src/types/host-app.d.ts` only declares the `virtual:kartore-host/*` modules the adapter imports at runtime.

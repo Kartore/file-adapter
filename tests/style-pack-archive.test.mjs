@@ -14,7 +14,7 @@ let StylePackStore;
 
 before(async () => {
 	globalThis.$state = (value) => value;
-	const coreLib = fileURLToPath(new URL('../../svelte/src/lib/', import.meta.url));
+	const coreLib = fileURLToPath(new URL('../../svelte/src/', import.meta.url));
 	server = await createServer({
 		root: new URL('..', import.meta.url).pathname,
 		logLevel: 'silent',

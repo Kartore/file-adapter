@@ -1,6 +1,6 @@
 import type { StyleSpecification } from 'maplibre-gl';
 
-import type { EditorApi } from 'virtual:kartore-host/editor/EditorModule.ts';
+import type { EditorApi } from '@kartore/editor/types';
 import { parseStyleJSON, type StyleImportResult } from 'virtual:kartore-host/utils/styleImport.ts';
 
 import { fileIntegrationFeatures, type FileSystemFileHandleLike } from '../features.ts';

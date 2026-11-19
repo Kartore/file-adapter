@@ -10,6 +10,8 @@ export type KartoreAdapterVitePlugin = {
 	name: string;
 	api: {
 		kartoreAdapter: {
+			/** アダプタ契約のバージョン。@kartore/editor 0.1 は 2 */
+			contract: 2;
 			/** `adapterModules` / `adapterProviders` を export するモジュール指定子 */
 			clientModule: string;
 			/** `adapterApiHandlers` を export するモジュール指定子 (バックエンドを持つ場合のみ) */
@@ -25,6 +27,7 @@ export const fileAdapter = (): KartoreAdapterVitePlugin => ({
 	name: 'kartore-file-adapter',
 	api: {
 		kartoreAdapter: {
+			contract: 2,
 			clientModule: '@kartore/file-adapter/svelte'
 		}
 	}
