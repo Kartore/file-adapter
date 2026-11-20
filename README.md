@@ -22,7 +22,7 @@ The implementation lives under `src/`: `src/svelte/` contains the editor module,
 
 ## Host usage
 
-Requires `@kartore/editor` 0.1 (adapter contract 2). Pass `fileAdapter()` to the editor's `kartore()` Vite preset:
+Requires `@kartore/editor` 0.3 (adapter contract 2; sprite icons are `{ svg, sdf? }`). Pass `fileAdapter()` to the editor's `kartore()` Vite preset:
 
 ```ts
 // vite.config.ts

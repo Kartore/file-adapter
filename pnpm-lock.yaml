@@ -12,8 +12,8 @@ importers:
         specifier: ^10.0.1
         version: 10.0.1(eslint@10.6.0(jiti@2.7.0))
       '@kartore/editor':
-        specifier: ^0.1.0
-        version: 0.1.0(@tanstack/svelte-query@6.4.3(svelte@5.56.4(@typescript-eslint/types@8.63.0)))(bits-ui@2.21.0(@internationalized/date@3.12.4)(svelte@5.56.4(@typescript-eslint/types@8.63.0)))(maplibre-gl@6.19.0)(phosphor-svelte@3.1.1(svelte@5.56.4(@typescript-eslint/types@8.63.0))(vite@8.1.3(jiti@2.7.0)))(svelte@5.56.4(@typescript-eslint/types@8.63.0))(tailwindcss@4.3.5)(vite@8.1.3(jiti@2.7.0))
+        specifier: ^0.3.0
+        version: 0.3.0(@tanstack/svelte-query@6.4.3(svelte@5.56.4(@typescript-eslint/types@8.63.0)))(bits-ui@2.21.0(@internationalized/date@3.12.4)(svelte@5.56.4(@typescript-eslint/types@8.63.0)))(maplibre-gl@6.19.0)(phosphor-svelte@3.1.1(svelte@5.56.4(@typescript-eslint/types@8.63.0))(vite@8.1.3(jiti@2.7.0)))(svelte@5.56.4(@typescript-eslint/types@8.63.0))(tailwindcss@4.3.5)(vite@8.1.3(jiti@2.7.0))
       eslint:
         specifier: ^10.4.1
         version: 10.6.0(jiti@2.7.0)
@@ -188,8 +188,8 @@ packages:
   '@jridgewell/trace-mapping@0.3.31':
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
 
-  '@kartore/editor@0.1.0':
-    resolution: {integrity: sha512-DxfbNVBrVphW/wwlTPKm+87H7HPp37RZqvo1WXL5I3tJvink/CXBjd2jilqMsKLZ3o2NbiSrGx7ZPGbfrTNi/Q==}
+  '@kartore/editor@0.3.0':
+    resolution: {integrity: sha512-GWcsWi2UEYyNca/f3eSEtGCRIR0WGuIkjkXFtk6IdDp0RH0OfmdYPxKvI0wKKxLxGdtg5AsmeiFJx+qB6jxOuw==}
     peerDependencies:
       '@tanstack/svelte-query': ^6.0.0
       bits-ui: ^2.0.0
@@ -203,8 +203,8 @@ packages:
     resolution: {integrity: sha512-PGcA24BynHK8I2WZLKzAeNxYF2Ztan0j62jKZHt9vQXDcEWK5d49eAZSFgf0UGdspF/dqLRVnHBe0cqKFjj4kw==}
     hasBin: true
 
-  '@kartore/spritore@0.2.0':
-    resolution: {integrity: sha512-fXtv5qGo7e2lwQy4hTUDNFhdgrNCDGpa/DL3q58ydZLg2M3WKeAvac+0tLkMiIUxRfwdqMKK2hAig3MdMJBbvg==}
+  '@kartore/spritore@0.3.0':
+    resolution: {integrity: sha512-BZvaVqSVq32I3DZYs285zNOzewYR9amU/eEjB5NtTYJk34rsU/uACImDskApGzCTR/VX7WWX+F6+buQZh2jUBA==}
     hasBin: true
 
   '@lezer/common@1.5.5':
@@ -1418,12 +1418,6 @@ packages:
       svelte:
         optional: true
 
-  svelte-maplibre-gl@2.2.1:
-    resolution: {integrity: sha512-HCJBs5WhKtQ4aba4AhU9sE/XE0X7NgVNRQG27qUEdsXeUGdE6ZPQoaQSyKE8WzbGR8+GGfyGFajz1+1le51TCQ==}
-    peerDependencies:
-      maplibre-gl: ^5.19.0 || ^6.0.0
-      svelte: '>=5.0.0'
-
   svelte-toolbelt@0.10.7:
     resolution: {integrity: sha512-gjuUVEEpo38UJCeI1ssE3NxG31tYENczPTcTGTXf4338qAQNdR9I1oAEbQY0KQFmbdUojNIhHuRNix7ThwFNxQ==}
     engines: {node: '>=18', pnpm: '>=8.7.0'}
@@ -1806,7 +1800,7 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
 
-  '@kartore/editor@0.1.0(@tanstack/svelte-query@6.4.3(svelte@5.56.4(@typescript-eslint/types@8.63.0)))(bits-ui@2.21.0(@internationalized/date@3.12.4)(svelte@5.56.4(@typescript-eslint/types@8.63.0)))(maplibre-gl@6.19.0)(phosphor-svelte@3.1.1(svelte@5.56.4(@typescript-eslint/types@8.63.0))(vite@8.1.3(jiti@2.7.0)))(svelte@5.56.4(@typescript-eslint/types@8.63.0))(tailwindcss@4.3.5)(vite@8.1.3(jiti@2.7.0))':
+  '@kartore/editor@0.3.0(@tanstack/svelte-query@6.4.3(svelte@5.56.4(@typescript-eslint/types@8.63.0)))(bits-ui@2.21.0(@internationalized/date@3.12.4)(svelte@5.56.4(@typescript-eslint/types@8.63.0)))(maplibre-gl@6.19.0)(phosphor-svelte@3.1.1(svelte@5.56.4(@typescript-eslint/types@8.63.0))(vite@8.1.3(jiti@2.7.0)))(svelte@5.56.4(@typescript-eslint/types@8.63.0))(tailwindcss@4.3.5)(vite@8.1.3(jiti@2.7.0))':
     dependencies:
       '@codemirror/autocomplete': 6.20.4
       '@codemirror/commands': 6.11.1
@@ -1817,7 +1811,7 @@ snapshots:
       '@codemirror/view': 6.43.15
       '@internationalized/number': 3.6.9
       '@kartore/glyphore': 0.2.0
-      '@kartore/spritore': 0.2.0
+      '@kartore/spritore': 0.3.0
       '@maplibre/maplibre-gl-style-spec': 26.8.0
       '@sveltejs/vite-plugin-svelte': 7.3.1(svelte@5.56.4(@typescript-eslint/types@8.63.0))(vite@8.1.3(jiti@2.7.0))
       '@tailwindcss/vite': 4.3.5(vite@8.1.3(jiti@2.7.0))
@@ -1829,14 +1823,13 @@ snapshots:
       phosphor-svelte: 3.1.1(svelte@5.56.4(@typescript-eslint/types@8.63.0))(vite@8.1.3(jiti@2.7.0))
       srvx: 1.0.6
       svelte: 5.56.4(@typescript-eslint/types@8.63.0)
-      svelte-maplibre-gl: 2.2.1(maplibre-gl@6.19.0)(svelte@5.56.4(@typescript-eslint/types@8.63.0))
       tailwind-merge: 3.7.0
       tailwindcss: 4.3.5
       vite: 8.1.3(jiti@2.7.0)
 
   '@kartore/glyphore@0.2.0': {}
 
-  '@kartore/spritore@0.2.0': {}
+  '@kartore/spritore@0.3.0': {}
 
   '@lezer/common@1.5.5': {}
 
@@ -2632,7 +2625,7 @@ snapshots:
 
   magic-string@0.30.21:
     dependencies:
-      '@jridgewell/sourcemap-codec': 1.5.5
+      '@jridgewell/sourcemap-codec': 1.6.0
 
   magic-string@1.4.5:
     dependencies:
@@ -2866,11 +2859,6 @@ snapshots:
       postcss-selector-parser: 7.1.4
       semver: 7.8.5
     optionalDependencies:
-      svelte: 5.56.4(@typescript-eslint/types@8.63.0)
-
-  svelte-maplibre-gl@2.2.1(maplibre-gl@6.19.0)(svelte@5.56.4(@typescript-eslint/types@8.63.0)):
-    dependencies:
-      maplibre-gl: 6.19.0
       svelte: 5.56.4(@typescript-eslint/types@8.63.0)
 
   svelte-toolbelt@0.10.7(svelte@5.56.4(@typescript-eslint/types@8.63.0)):
