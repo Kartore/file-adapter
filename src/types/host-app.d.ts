@@ -2,8 +2,10 @@
 // EditorModule / EditorApi などの型は @kartore/editor/types から import type する (ここに複製しない)
 declare module 'virtual:kartore-host/utils/stylePack.ts' {
 	import type { StyleSpecification } from 'maplibre-gl';
+	import type { SpriteIcons } from '@kartore/editor/types';
 
-	export type SpriteIcons = Record<string, string>;
+	// アイコンの形 ({ svg, sdf? }) は editor の型をそのまま使う
+	export type { SpriteIcons };
 
 	export type StoredFont = {
 		familyName: string;

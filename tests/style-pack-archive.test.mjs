@@ -56,7 +56,7 @@ const project = () => ({
 		layers: [{ id: 'background', type: 'background' }]
 	},
 	assets: {
-		icons: { marker: '<svg />' },
+		icons: { marker: { svg: '<svg />', sdf: true } },
 		fonts: {
 			'Inter Regular': {
 				familyName: 'Inter',
